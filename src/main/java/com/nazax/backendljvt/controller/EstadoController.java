@@ -17,9 +17,8 @@ public class EstadoController {
     private final EstadoService estadoService;
 
     @GetMapping("/")
-    public ResponseEntity<Estado> buscarEstados() {
-        List<Estado> estados = estadoService.findAll();
-        return ResponseEntity.ok().body(estados.get(0));
+    public List<Estado> buscarEstados() {
+        return estadoService.buscarTodos();
     }
 
     @PostMapping("/")
