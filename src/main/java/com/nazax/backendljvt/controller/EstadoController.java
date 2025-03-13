@@ -26,13 +26,13 @@ public class EstadoController {
         return estadoService.inserir(estado);
     }
 
-    @PutMapping("/{id}")
-    public Estado atualizarEstado(@PathParam("id") Estado estado) {
+    @PutMapping("/")
+    public Estado atualizarEstado(@RequestBody Estado estado) {
         return estadoService.atualizar(estado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarEstado(@PathParam("id") Long id) {
+    public ResponseEntity<Void> deletarEstado(@PathVariable("id") Long id) {
         estadoService.deletear(id);
         return ResponseEntity.ok().build();
     }
