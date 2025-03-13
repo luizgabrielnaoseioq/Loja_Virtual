@@ -1,21 +1,13 @@
 package com.nazax.backendljvt.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Table(name = "estado")
 public class Estado {
 
     @Id
@@ -23,10 +15,9 @@ public class Estado {
     private Long id;
 
     private String nome;
-
     private String sigla;
-
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
-
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
 }
