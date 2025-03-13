@@ -14,7 +14,7 @@ public class EstadoService {
 
     private final EstadoRepository estadoRepository;
 
-    public List<Estado> findAll(){
+    public List<Estado> buscarTodos(){
         return estadoRepository.findAll();
     }
 
