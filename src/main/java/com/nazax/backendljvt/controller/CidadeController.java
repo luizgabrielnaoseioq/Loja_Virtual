@@ -21,7 +21,7 @@ public class CidadeController {
     }
 
     @PostMapping("/")
-    public Cidade criarCidade(Cidade cidade) {
+    public Cidade criarCidade(@RequestBody Cidade cidade) {
         return cidadeService.criarCidade(cidade);
     }
 
