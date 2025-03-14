@@ -25,7 +25,7 @@ public class CidadeController {
         return cidadeService.criarCidade(cidade);
     }
 
-    public Cidade atualizarCidade(Cidade cidade) {
+    public Cidade atualizarCidade(@RequestBody Cidade cidade) {
         return cidadeService.atualizarCidade(cidade);
     }
 
