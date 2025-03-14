@@ -2,6 +2,7 @@ package com.nazax.backendljvt.controller;
 
 import com.nazax.backendljvt.entity.Pessoa;
 import com.nazax.backendljvt.service.PessoaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,9 @@ public class PessoaController {
     }
 
     @PostMapping("/")
-    public Pessoa criarPessoa(@RequestBody Pessoa pessoa) {
-        return pessoaService.criarPessoa(pessoa);
+    public ResponseEntity<Pessoa> criarPessoa(@Valid @RequestBody Pessoa pessoa) {
+        pessoaService.criarPessoa(pessoa);
+        return ResponseEntity.ok(pessoa);
     }
 
     @PutMapping("/")
