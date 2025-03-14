@@ -23,4 +23,11 @@ public class Cidade {
     @ManyToOne
     @JoinColumn(name = "idEstado")
     private Estado estado;
+
+    public Cidade() {}
+
+    public Cidade(String nome, Estado estado) {
+        this.nome = nome;
+        this.estado = estado;
+    }
 }
