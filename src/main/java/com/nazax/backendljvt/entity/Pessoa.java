@@ -40,4 +40,8 @@ public class Pessoa {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
+
+    @ManyToOne
+    @JoinColumn(name = "cidade_id", nullable = false)
+    private Cidade cidade;
 }
