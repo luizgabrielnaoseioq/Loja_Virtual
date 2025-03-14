@@ -1,13 +1,10 @@
 package com.nazax.backendljvt.controller;
 
 import com.nazax.backendljvt.entity.Cidade;
-import com.nazax.backendljvt.repository.CidadeRepository;
 import com.nazax.backendljvt.service.CidadeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,11 +15,22 @@ public class CidadeController {
 
     private final CidadeService cidadeService;
 
+    @GetMapping("/")
     public List<Cidade> buscarCidades() {
         return cidadeService.buscarTodasAsCidades();
     }
 
-    public ResponseEntity<Void> removerCidade(@PathVariable Long id) {
+    @PostMapping("/")
+    public Cidade criarCidade(Cidade cidade) {
+        return cidadeService.criarCidade(cidade);
+    }
+
+    public Cidade atualizarCidade(Cidade cidade) {
+        return cidadeService.atualizarCidade(cidade);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerCidade(@PathVariable("id") Long id) {
         cidadeService.removerCidade(id);
         return ResponseEntity.ok().build();
     }
