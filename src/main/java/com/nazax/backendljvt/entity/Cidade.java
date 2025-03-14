@@ -19,4 +19,8 @@ public class Cidade {
     private Date dataCadastro;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAlteracao;
+
+    @ManyToOne
+    @JoinColumn(name = "idEstado")
+    private Estado estado;
 }
