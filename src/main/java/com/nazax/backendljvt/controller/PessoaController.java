@@ -21,9 +21,8 @@ public class PessoaController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Pessoa> criarPessoa(@Valid @RequestBody Pessoa pessoa) {
-        pessoaService.criarPessoa(pessoa);
-        return ResponseEntity.ok(pessoa);
+    public Pessoa criarPessoa(@Valid @RequestBody Pessoa pessoa) {
+        return pessoaService.criarPessoa(pessoa);
     }
 
     @PutMapping("/")
