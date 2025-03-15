@@ -28,7 +28,17 @@ public class Produto {
     @NotNull(message = "Valor não pode ser nulo!")
     private Double valorVenda;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
+
+    @ManyToOne
+    @JoinColumn(name = "idMarca")
+    private Marca marca;
+
+    @ManyToOne
+    @JoinColumn(name = "idCategoria")
+    private Categoria categoria;
 }
