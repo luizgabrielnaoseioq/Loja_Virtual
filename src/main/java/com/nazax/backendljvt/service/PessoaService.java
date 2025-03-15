@@ -19,7 +19,7 @@ public class PessoaService {
         return pessoaRepository.findAll();
     }
 
-    public Pessoa inserir(Pessoa objeto) {
+    public Pessoa inserir(Pessoa objeto){
         objeto.setDataCriacao(new Date());
         Pessoa objetoNovo = pessoaRepository.saveAndFlush(objeto);
         return objetoNovo;

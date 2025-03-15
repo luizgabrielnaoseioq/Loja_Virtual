@@ -2,7 +2,7 @@ package com.nazax.backendljvt.controller;
 
 import com.nazax.backendljvt.entity.Permissao;
 import com.nazax.backendljvt.service.PermissaoService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,29 +10,31 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/permissao")
-@RequiredArgsConstructor
+@CrossOrigin
 public class PermissaoController {
 
-    private final PermissaoService permissaoService;
+    @Autowired
+    private PermissaoService permissaoService;
 
     @GetMapping("/")
-    public List<Permissao> listarPermissoes(){
-        return permissaoService.buscarTudo();
+    public List<Permissao> buscarTodos(){
+        return permissaoService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Permissao criarPermissao(@RequestBody Permissao permissao){
-        return permissaoService.criarPermissao(permissao);
+    public Permissao inserir(@RequestBody Permissao objeto){
+        return permissaoService.inserir(objeto);
     }
 
     @PutMapping("/")
-    public Permissao atualizarPermissao(@RequestBody Permissao permissao){
-        return permissaoService.atualizarPermissao(permissao);
+    public Permissao alterar(@RequestBody Permissao objeto){
+        return permissaoService.alterar(objeto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirPermissao(@PathVariable("id") Long id){
-        permissaoService.excluirPermissao(id);
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+        permissaoService.excluir(id);
         return ResponseEntity.ok().build();
     }
+
 }

@@ -18,7 +18,7 @@ public class Permissao {
     @NotBlank(message = "O nome não pode ser invalido!")
     private String nome;
 
-    private Date dataCadastro;
+    private Date dataCriacao;
 
     private Date dataAtualizacao;
 }
