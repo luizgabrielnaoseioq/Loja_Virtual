@@ -9,11 +9,17 @@ import java.util.Date;
 @Entity
 @Table(name = "permissao_pessoa")
 @Data
-public class PermissaoPessoa implements GrantedAuthority{
+public class PermissaoPessoa{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAtualizacao;
 
     @ManyToOne
     @JoinColumn(name = "idPessoa")
@@ -23,13 +29,4 @@ public class PermissaoPessoa implements GrantedAuthority{
     @ManyToOne
     @JoinColumn(name = "idPermissao")
     private Permissao permissao;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataCriacao;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataAtualizacao;
-    @Override
-    public String getAuthority() {
-        return permissao.getNome();
-    }
 }
