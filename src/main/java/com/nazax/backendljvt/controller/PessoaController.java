@@ -2,37 +2,40 @@ package com.nazax.backendljvt.controller;
 
 import com.nazax.backendljvt.entity.Pessoa;
 import com.nazax.backendljvt.service.PessoaService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/pessoa")
-@RequiredArgsConstructor
+@CrossOrigin
 public class PessoaController {
 
-    private final PessoaService pessoaService;
+    @Autowired
+    private PessoaService pessoaService;
 
     @GetMapping("/")
-    public List<Pessoa> buscarPessoas() {
-        return pessoaService.buscarTodasPessoas();
+    public List<Pessoa> buscarTodos(){
+        return pessoaService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Pessoa criarPessoa(@Valid @RequestBody Pessoa pessoa) {
-        return pessoaService.criarPessoa(pessoa);
+    public Pessoa inserir(@RequestBody Pessoa objeto){
+        return pessoaService.inserir(objeto);
     }
 
     @PutMapping("/")
-    public Pessoa atualizarPessoa(@RequestBody Pessoa pessoa) {
-        return pessoaService.atualizarPessoa(pessoa);
+    public Pessoa alterar(@RequestBody Pessoa objeto){
+        return pessoaService.alterar(objeto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarPessoa(@PathVariable("id") Long id) {
-        pessoaService.deletarPessoa(id);
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+        pessoaService.excluir(id);
         return ResponseEntity.ok().build();
     }
+
 }

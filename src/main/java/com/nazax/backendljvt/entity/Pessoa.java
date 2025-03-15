@@ -2,61 +2,84 @@ package com.nazax.backendljvt.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 
-import java.lang.invoke.CallSite;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "pessoa")
-public class Pessoa {
+@Data
+public class Pessoa  implements UserDetails{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "O nome é obrigatorio")
     private String nome;
-
-    @NotBlank(message = "O CPF é obrigatorio")
     private String cpf;
-
-    @NotBlank(message = "O  é obrigatorio")
-    @Email(message = "E-mail inválido")
     private String email;
-
-    @NotBlank(message = "A senha é obrigatorio")
+    private String codigoRecuperacaoSenha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataEnvioCodigo;
     private String senha;
-
-    @NotBlank(message = "O endereço é obrigatorio")
     private String endereco;
-
-    @NotBlank(message = "O CEP é obrigatorio")
     private String cep;
+    @ManyToOne
+    @JoinColumn(name="idCidade")
+    private Cidade cidade;
+
+    @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @Setter(value = AccessLevel.NONE)
+    private List<PermissaoPessoa> permissaoPessoas;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataCadastro;
-
+    private Date dataCriacao;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "idCidade")
-    private Cidade cidade;
-
-    @Setter(value = AccessLevel.NONE)
-    @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<PermissaoPessoa> permissaoPessoa;
-
     public void setPermissaoPessoas(List<PermissaoPessoa> pp){
-        for (PermissaoPessoa p : pp){
+        for(PermissaoPessoa p:pp){
             p.setPessoa(this);
         }
-        this.permissaoPessoa = pp;
+        this.permissaoPessoas = pp;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return permissaoPessoas;
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
