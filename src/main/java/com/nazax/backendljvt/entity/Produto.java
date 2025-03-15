@@ -16,16 +16,12 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Campo obrigatorio")
     private String descricaoCurta;
 
-    @NotBlank(message = "Campo obrigatorio")
     private String descricaoDetalhada;
 
-    @NotNull(message = "Valor não pode ser nulo!")
     private Double valorCusto;
 
-    @NotNull(message = "Valor não pode ser nulo!")
     private Double valorVenda;
 
     @Temporal(TemporalType.TIMESTAMP)
